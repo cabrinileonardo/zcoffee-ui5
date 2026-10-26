@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCOFFEE_SRV" xml:lang="pt" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZCDS_HIST_SALARIOType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative"/>
+                <Property Name="FuncionarioId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
+                <Property Name="SalarioAntigo" Type="Edm.Decimal" Precision="16" Scale="3"/>
+                <Property Name="SalarioNovo" Type="Edm.Decimal" Precision="16" Scale="3"/>
+                <Property Name="Moeda" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Moeda" sap:quickinfo="Código da moeda" sap:semantics="currency-code"/>
+                <Property Name="DataAlteracao" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="HoraAlteracao" Type="Edm.Time" Precision="0"/>
+                <Property Name="Usuario" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Nome do usuário"/>
+            </EntityType>
+            <EntityType Name="ZIRH_ZCOFFEEType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="Cod Func" sap:quickinfo="Código do funcionário"/>
+                <Property Name="Nome" Type="Edm.String" MaxLength="60" sap:label="Nome"/>
+                <Property Name="CPF" Type="Edm.String" MaxLength="14" sap:label="CPF"/>
+                <Property Name="Email" Type="Edm.String" MaxLength="100" sap:label="Email"/>
+                <Property Name="Telefone" Type="Edm.String" MaxLength="20" sap:label="Telefone"/>
+                <Property Name="Nascimento" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data de Nascimento"/>
+                <Property Name="Admissao" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data de admissão"/>
+                <Property Name="Cargo" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Cargo" sap:quickinfo="Cargo (barista, atendente etc.)"/>
+                <Property Name="Salario" Type="Edm.Decimal" Precision="16" Scale="3" sap:label="Salário mensal"/>
+                <Property Name="Moeda" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Moeda" sap:semantics="currency-code"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status"/>
+                <Property Name="Login" Type="Edm.String" MaxLength="15" sap:label="Login"/>
+            </EntityType>
+            <EntityType Name="ZI_MM_FORNECEDORType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdForn"/>
+                </Key>
+                <Property Name="IdForn" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="ID Fornecedor"/>
+                <Property Name="Nome" Type="Edm.String" MaxLength="60" sap:label="Nome"/>
+                <Property Name="CNPJ" Type="Edm.String" MaxLength="14" sap:label="CNPJ"/>
+                <Property Name="Email" Type="Edm.String" MaxLength="100" sap:label="Email"/>
+                <Property Name="Telefone" Type="Edm.String" MaxLength="20" sap:label="Telefone"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status"/>
+            </EntityType>
+            <EntityType Name="ZI_MM_FORN_PRODUTOType" sap:label="CDS View para relação Fornecedor x Produto" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdForn"/>
+                    <PropertyRef Name="IdProd"/>
+                </Key>
+                <Property Name="IdForn" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="ID Fornecedor"/>
+                <Property Name="IdProd" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="ID Produto"/>
+                <Property Name="NomeFornecedor" Type="Edm.String" MaxLength="60" sap:label="Nome"/>
+                <Property Name="NomeProduto" Type="Edm.String" MaxLength="60" sap:label="Nome"/>
+                <Property Name="PrecoCompra" Type="Edm.Decimal" Precision="12" Scale="3" sap:label="Valor unitário"/>
+                <Property Name="Moeda" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Moeda" sap:semantics="currency-code"/>
+                <Property Name="PrazoEntregaDias" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Prazo Entrega" sap:quickinfo="Prazo de entrega (dias)"/>
+                <Property Name="CodProdForn" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Cód Prod Fornec." sap:quickinfo="Código do produto no fornecedor"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status"/>
+                <Property Name="DataUltimaCompra" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+            </EntityType>
+            <EntityType Name="ZI_MM_PRODUTOType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="ID Produto"/>
+                <Property Name="Nome" Type="Edm.String" MaxLength="60" sap:label="Nome"/>
+                <Property Name="Descricao" Type="Edm.String" MaxLength="100" sap:label="Descrição"/>
+                <Property Name="Preco" Type="Edm.Decimal" Precision="12" Scale="3" sap:label="Valor unitário"/>
+                <Property Name="Moeda" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Moeda" sap:semantics="currency-code"/>
+                <Property Name="Categoria" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Código da categoria" sap:quickinfo="Ex: Café, Doce, Salgado"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status"/>
+                <Property Name="Unidade" Type="Edm.String" MaxLength="3" sap:label="UMB" sap:quickinfo="Unidade de medida básica" sap:semantics="unit-of-measure"/>
+                <Property Name="Criacao" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+            </EntityType>
+            <EntityContainer Name="ZCOFFEE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZCDS_HIST_SALARIO" EntityType="ZCOFFEE_SRV.ZCDS_HIST_SALARIOType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZIRH_ZCOFFEE" EntityType="ZCOFFEE_SRV.ZIRH_ZCOFFEEType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_MM_FORNECEDOR" EntityType="ZCOFFEE_SRV.ZI_MM_FORNECEDORType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZI_MM_FORN_PRODUTO" EntityType="ZCOFFEE_SRV.ZI_MM_FORN_PRODUTOType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_MM_PRODUTO" EntityType="ZCOFFEE_SRV.ZI_MM_PRODUTOType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="ZCOFFEE_SRV.ZCOFFEE_SRV_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <atom:link rel="self" href="http://SEU-SERVIDOR-SAP:PORTA/sap/opu/odata/sap/ZCOFFEE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://SEU-SERVIDOR-SAP:PORTA/sap/opu/odata/sap/ZCOFFEE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

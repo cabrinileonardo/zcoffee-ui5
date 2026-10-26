@@ -1,0 +1,261 @@
+<mvc:View
+    controllerName="zcoffee.controller.MM.ViewProducts"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        id="page_Products"
+        title="{i18n>Produtos}"
+        showNavButton="true"
+        navButtonPress="onNavBack"
+    >
+        <smartFilterBar:SmartFilterBar
+            id="SF_products"
+            persistencyKey="products"
+            entitySet="ZI_MM_PRODUTO"
+            enableBasicSearch="false"
+            initialise="onSmartFilterBarInitialise"
+        >
+            <smartFilterBar:controlConfiguration>
+                <smartFilterBar:ControlConfiguration
+                    id="sf_products1"
+                    key="Id"
+                    index="0"
+                    label="ID do produto"
+                    groupId="_BASIC"
+                    width="auto"
+                    visibleInAdvancedArea="true"
+                    controlType="input"
+                />
+
+                <smartFilterBar:ControlConfiguration
+                    id="sd_products3"
+                    key="Categoria"
+                    index="1"
+                    label="Categoria"
+                    groupId="_BASIC"
+                    width="auto"
+                    visibleInAdvancedArea="true"
+                >
+                    <smartFilterBar:customControl>
+                        <MultiComboBox id="mcb_category">
+                            <core:Item
+                                id="IdItem1"
+                                key="1"
+                                text="Bebida Quente"
+                            />
+                            <core:Item
+                                id="IdItem2"
+                                key="2"
+                                text="Bebida Fria"
+                            />
+                            <core:Item
+                                id="IdItem3"
+                                key="3"
+                                text="Salgado"
+                            />
+                            <core:Item
+                                id="IdItem4"
+                                key="4"
+                                text="Sobremesa"
+                            />
+                            <core:Item
+                                id="IdItem5"
+                                key="5"
+                                text="Entrada"
+                            />
+                        </MultiComboBox>
+                    </smartFilterBar:customControl>
+                </smartFilterBar:ControlConfiguration>
+
+                <smartFilterBar:ControlConfiguration
+                    id="sd_products4"
+                    key="Status"
+                    index="2"
+                    label="Status"
+                    groupId="_BASIC"
+                    width="auto"
+                    visibleInAdvancedArea="true"
+                >
+                    <smartFilterBar:customControl>
+                        <MultiComboBox
+                            id="mcb_status"
+                        >
+                            <core:Item
+                                id="IdStatusA"
+                                key="A"
+                                text="Ativo"
+                            />
+                            <core:Item
+                                id="IdStatusI"
+                                key="I"
+                                text="Inativo"
+                            />
+                        </MultiComboBox>
+                    </smartFilterBar:customControl>
+                </smartFilterBar:ControlConfiguration>
+            </smartFilterBar:controlConfiguration>
+        </smartFilterBar:SmartFilterBar>
+
+        <smartTable:SmartTable
+            id="ProductsSmartTable"
+            entitySet="ZI_MM_PRODUTO"
+            smartFilterId="SF_products"
+            tableType="Table"
+            enableExport="true"
+            useVariantManagement="true"
+            useTablePersonalisation="true"
+            header="{i18n>listProductsTitle}"
+            showRowCount="true"
+            persistencyKey="products"
+            enableAutoBinding="true"
+            class="sapUiResponsiveContentPadding"
+            enableAutoColumnWidth="true"
+            editTogglable="false"
+            initiallyVisibleFields="Nome"
+            showFullScreenButton="true"
+            beforeRebindTable="onBeforeRebindTable"
+        >
+            <smartTable:customToolbar>
+                <OverflowToolbar
+                    id="_IDGenOverflowToolbar1"
+                    design="Solid"
+                >
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                    <OverflowToolbarButton
+                        id="btAdd"
+                        icon="sap-icon://add"
+                        press="onAddProduct"
+                        text="Adicionar"
+                    />
+                    <OverflowToolbarButton
+                        id="btReset"
+                        icon="sap-icon://reset"
+                        press="onResetFilter"
+                        text=""
+                    />
+                </OverflowToolbar>
+            </smartTable:customToolbar>
+            <Table
+                id="idTableProd"
+                growing="true"
+                width="100%"
+                itemPress="onItemPress"
+            >
+                <columns>
+                    <Column>
+                        <customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='{"columnKey": "Id", "leadingProperty":"Id", "sortProperty": "Id", "columnIndex": 0}'
+                            />
+                        </customData>
+                        <Text text="ID Produto" />
+                    </Column>
+                    <Column>
+                        <customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='{"columnKey": "Preco", "leadingProperty":"Preco", "sortProperty": "Preco", "columnIndex": 2, "additionalProperty": "Moeda"}'
+                            />
+                        </customData>
+                        <Text text="Preço" />
+                    </Column>
+
+                    <Column>
+                        <customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='{"columnKey": "Categoria", "leadingProperty":"Categoria", "columnIndex": 4, "sortProperty":"Categoria"}'
+                            />
+                        </customData>
+                        <Text text="Categoria" />
+                    </Column>
+                    <Column id="statusProd">
+                        <customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='{"columnKey": "Status", "leadingProperty":"Status", "columnIndex": 6, "sortProperty":"Status"}'
+                            />
+                        </customData>
+                        <Text text="Status" />
+                    </Column>
+                    <Column width="40px">
+                        <customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='{"columnKey": "Acoes", "leadingProperty":"Status", "columnIndex": 7}'
+                            />
+                        </customData>
+                        <header>
+                            <Text text="Ações" />
+                        </header>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        id="_IDGenColumnListItem1"
+                        highlight="Success"
+                        type='Detail'
+                        detailPress='onEdit'
+                    >
+                        <Label
+                            text="{Id}"
+                            design="Bold"
+                        />
+
+                        <ObjectNumber
+                            number="{
+                                parts: [{path: 'Preco'}, {path: 'Moeda'}],
+                                type: 'sap.ui.model.type.Currency',
+                                formatOptions: {
+                                    showMeasure: false
+                                }
+                            }"
+                            unit="{Moeda}"
+                        />
+
+                        <Label
+                            text="{path:'Categoria', formatter:'.formatter.formatCategoria'}"
+                        />
+
+                        <ObjectStatus
+                            text="{path: 'Status', formatter: '.formatter.formatStatus'}"
+                            state="{path: 'Status', formatter: '.formatter.formatStatusState'}"
+                            inverted="true"
+                        />
+
+                        <HBox justifyContent="Center">
+                            <Button
+                                icon="sap-icon://decline"
+                                type="Transparent"
+                                press="onInativarProduto"
+                                tooltip="Inativar"
+                                visible="{= ${Status} === 'A' }"
+                            />
+
+                            <Button
+                                icon="sap-icon://refresh"
+                                type="Transparent"
+                                press="onReativarProduto"
+                                tooltip="Reativar"
+                                visible="{= ${Status} === 'I' }"
+                            />
+                        </HBox>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <smartTable:layoutData>
+                <FlexItemData
+                    growFactor="1"
+                    baseSize="0%"
+                />
+            </smartTable:layoutData>
+        </smartTable:SmartTable>
+    </Page>
+</mvc:View>

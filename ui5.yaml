@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+metadata:
+  name: zcoffee
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ui5:
+          path:
+            # runtime UI5 hospedado no proprio SAP (mesma versao 1.120.23).
+            # O CDN publico nao serve modulos JS avulsos nesta rede - so os bundles -
+            # o que quebrava SmartTable/sap.ui.fl. pathReplace faz o middleware pular
+            # o segmento de versao e reescrever o path direto.
+            - path: /resources
+              url: http://SEU-SERVIDOR-SAP:PORTA
+              pathReplace: /sap/public/bc/ui5_ui5/resources
+            # test-resources nao existe no SAP (404); segue no CDN, usado so pelas
+            # paginas de teste QUnit/OPA.
+            - path: /test-resources
+              url: https://ui5.sap.com
+        backend:
+          - path: /sap
+            url: http://SEU-SERVIDOR-SAP:PORTA
+            client: '100'
+            authenticationType: basic
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        flp:
+          theme: sap_horizon
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+      # config do sandbox FLP local - nao faz sentido no launchpad real
+      - /appconfig/**

@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="SupplierDialog" title="{supDialogSettings>/dialogTitle}">
+        <content>
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                <f:content>
+
+                    <Label text="{i18n>supplierId}" visible="{supDialogSettings>/isEditMode}" />
+                    <Input id="inputSupplierId" visible="{supDialogSettings>/isEditMode}" editable="false" value="{suppliersData>/IdForn}"/>
+
+                    <Label text="{i18n>supplierName}" required="true" />
+                    <Input id="inputSupplierName" placeholder="{i18n>supplierNamePlaceholder}" value="{suppliersData>/Nome}"/>
+
+                    <Label text="{i18n>supplierCNPJ}" required="true"/>
+                    <MaskInput
+                        id="inputSupplierCNPJ"
+                        mask="99.999.999/9999-99"
+                        placeholderSymbol="_"
+                        placeholder="00.000.000/0000-00"
+                        value="{suppliersData>/CNPJ}"/>
+
+                    <Label text="{i18n>supplierEmail}" />
+                    <Input id="inputSupplierEmail" type="Email" placeholder="{i18n>supplierEmailPlaceholder}" value="{suppliersData>/Email}"/>
+
+                    <Label text="{i18n>supplierPhone}" />
+                    <Input
+                        id="inputSupplierPhone"
+                        placeholder="(00) 00000-0000"
+                        maxLength="15"
+                        liveChange=".onPhoneLiveChange"
+                        value="{suppliersData>/Telefone}" />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>btnSave}" type="Emphasized" press="onSaveSupplier" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>btnCancel}" press="onCloseSupplierDialog" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,215 @@
+<mvc:View controllerName="zcoffee.controller.MM.ViewSuppliers"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:core="sap.ui.core"
+    >
+
+    <Page id="pageSuppliers" 
+        title="{i18n>titleSuppliers}" 
+        showNavButton="true" 
+        navButtonPress="onNavBack"
+    >
+
+        <smartFilterBar:SmartFilterBar
+            id="SF_suppliers"
+            persistencyKey="suppliers"
+            entitySet="ZI_MM_FORNECEDOR"
+            enableBasicSearch="true"
+            basicSearchFieldName="Nome"
+            initialise="onSmartFilterBarInitialise"
+        >
+
+            <smartFilterBar:controlConfiguration>
+
+                    <!-- 1. ID do Fornecedor -->
+                    <smartFilterBar:ControlConfiguration 
+                        id="sf_idForn"
+                        key="IdForn"
+                        index="0"
+                        label="{i18n>supplierId}"
+                        groupId="_BASIC"
+                        visibleInAdvancedArea="true"
+                        controlType="input" />
+
+                    <!-- 2. CNPJ -->
+                    <smartFilterBar:ControlConfiguration 
+                        id="sf_cnpj"
+                        key="CNPJ"
+                        index="1"
+                        label="{i18n>supplierCNPJ}"
+                        groupId="_BASIC"
+                        visibleInAdvancedArea="true"
+                        controlType="input" />
+
+                    <!-- 3. Status (Ativo/Inativo) -->
+                    <smartFilterBar:ControlConfiguration 
+                        id="sf_ativo"
+                        key="Status"
+                        index="2"
+                        label="{i18n>supplierStatus}"
+                        groupId="_BASIC"
+                        visibleInAdvancedArea="true" >
+
+                        <smartFilterBar:customControl>
+                            <MultiComboBox id="mcb_status_sup" >
+                                <core:Item id="idItemAtivoSup"  key="A" text="{i18n>statusActive}"/>
+                                <core:Item id="dItemInativoSup" key="I" text="{i18n>statusInactive}"/>
+                            </MultiComboBox>
+                        </smartFilterBar:customControl>
+
+                    </smartFilterBar:ControlConfiguration>
+
+                    <!-- 4. E-mail (Opcional - visível apenas na busca avançada) -->
+                    <smartFilterBar:ControlConfiguration 
+                        id="sf_email"
+                        key="Email"
+                        index="3"
+                        label="{i18n>supplierEmail}"
+                        groupId="_BASIC"
+                        visibleInAdvancedArea="false" />
+                
+            </smartFilterBar:controlConfiguration>
+    
+        </smartFilterBar:SmartFilterBar>
+        
+        <smartTable:SmartTable
+            id="SuppliersSmartTable"
+            entitySet="ZI_MM_FORNECEDOR"
+            smartFilterId="SF_suppliers"
+            tableType="Table"
+            enableExport="true"
+            useVariantManagement="true"
+            useTablePersonalisation="true"
+            header="{i18n>listSuppliersTitle}"
+            showRowCount="true"
+            persistencyKey="suppliers"
+            enableAutoBinding="true"
+            class="sapUiResponsiveContentPadding"
+            enableAutoColumnWidth="true"
+            editTogglable="false"
+            initiallyVisibleFields="Nome,Email"
+            showFullScreenButton="true"
+            beforeRebindTable="onBeforeRebindTable"
+        >
+
+            <smartTable:customToolbar>
+
+                <OverflowToolbar id="_IDGenOverflowToolbarSuppliers" design="Solid">
+
+                    <ToolbarSpacer id="_IDGenToolbarSpacerSuppliers" />
+
+                    <OverflowToolbarButton
+                        id="btAddSuppliers"
+                        icon="sap-icon://add"
+                        press="onAdd"
+                        text="{i18n>btnAdd}"
+                    />
+                    <OverflowToolbarButton
+                        id="btResetFilterSuppliers"
+                        icon="sap-icon://reset"
+                        press="onResetFilter"
+                        text="{i18n>btnResetFilters}"
+                    />
+
+                </OverflowToolbar>
+
+            </smartTable:customToolbar>
+
+            <Table id="idTableSuppliers"
+                growing="true"
+                width="100%"
+            >
+
+                <columns>
+                
+                    <Column >
+                        <customData>
+                            <core:CustomData key="p13nData" 
+                                value='{"columnKey":"IdForn",
+                                        "leadingProperty":"IdForn",
+                                        "sortProperty":"IdForn",
+                                        "filterProperty":"IdForn",
+                                        "columnIndex":0
+                                        }' 
+                            />
+                        </customData>
+                        <Text text="{i18n>supplierId}" />
+                    </Column>
+
+                    <Column >
+                        <customData>
+                            <core:CustomData key="p13nData" 
+                                value='{"columnKey":"CNPJ",
+                                        "leadingProperty":"CNPJ",
+                                        "sortProperty":"CNPJ",
+                                        "filterProperty":"CNPJ",
+                                        "columnIndex":3
+                                        }' 
+                            />
+                        </customData>
+                        <Text text="{i18n>supplierCNPJ}" />
+                    </Column>
+
+                    <Column >
+                        <customData>
+                            <core:CustomData key="p13nData" 
+                                value='{"columnKey":"Telefone",
+                                        "leadingProperty":"Telefone",
+                                        "sortProperty":"Telefone",
+                                        "filterProperty":"Telefone",
+                                        "columnIndex":4
+                                        }' 
+                            />
+                        </customData>
+                        <Text text="{i18n>supplierPhone}" />
+                    </Column>
+
+                    <Column >
+                        <customData>
+                            <core:CustomData key="p13nData" 
+                                value='{"columnKey":"Status",
+                                        "leadingProperty":"Status",
+                                        "sortProperty":"Status",
+                                        "filterProperty":"Status",
+                                        "columnIndex":5
+                                        }' 
+                            />
+                        </customData>
+                        <Text text="{i18n>supplierStatus}" />
+                    </Column>
+
+                </columns>
+                
+                <items>
+                
+                    <ColumnListItem id="_IDGenColumnListItem2"
+                        highlight="Information"
+                        type='Detail'
+                        detailPress='onEdit'
+                        >
+
+                        <Label text="{IdForn}" design="Bold"/>
+                        <Text text="{ path:'CNPJ', formatter: '.formatter.formatCNPJ' }"/>  <!-- Quando está no JSON não precisa de {} para sinalizar o model -->
+                        <Text text="{ path: 'Telefone', formatter:'.formatter.formatCelular' }"/>
+                        <ObjectStatus
+                            text="{path: 'Status', formatter: '.formatter.formatStatus'}"
+                            state="{path: 'Status', formatter: '.formatter.formatStatusState'}"
+                            inverted="true"
+                        />
+                       
+                
+                    </ColumnListItem>
+                
+                </items>
+            
+            </Table>
+
+        </smartTable:SmartTable>
+
+
+
+
+    </Page>
+</mvc:View>

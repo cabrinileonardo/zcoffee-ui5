@@ -1,0 +1,158 @@
+<mvc:View
+    controllerName="zcoffee.controller.MM.ViewDetailProduct"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:ux="sap.uxap"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        id="pageDetailProduct"
+        title="{i18n>DetailProduct}"
+        showNavButton="true"
+        navButtonPress="_onNavBack"
+    >
+        <ux:ObjectPageLayout
+            id="objectPageLayoutDetailProduct"
+            class="sapUiResponsiveMargin"
+            upperCaseAnchorBar="false"
+            showTitleInHeaderContent="true"
+            headerContentPinned="true"
+        >
+            <ux:headerTitle>
+                <ux:ObjectPageDynamicHeaderTitle>
+                    <ux:expandedHeading>
+                        <VBox>
+                            <HBox alignItems="Center">
+                                <!-- <Avatar
+                                    class="sapUiSmallMarginEnd"
+                                    displayShape="Circle"
+                                    initials="{prodDetail>/Img}"
+                                    displaySize="L"
+                                /> -->
+
+                                <VBox>
+                                    <Title
+                                        text="{prodDetail>/Nome}"
+                                        wrapping="true"
+                                    />
+
+                                    <HBox
+                                        alignItems="Center"
+                                        class="sapUiTinyMarginTop"
+                                        renderType="Bare"
+                                    >
+                                        <Text text="{prodDetail>/Id}" class="sapUiSmallMarginEnd"/>
+
+                                        <ObjectStatus
+                                            text="{
+                                                path:'prodDetail>/Status',
+                                                formatter: '.formatter.formatStatus'
+                                            }"
+                                            state="Success"
+                                            inverted="true"
+                                        />
+                                    </HBox>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </ux:expandedHeading>
+
+                    <ux:snappedHeading>
+                        <HBox alignItems="Center">
+                            <!-- <Avatar
+                                class="sapUiTinyMarginEnd"
+                                initials="{prodDetail>/Img}"
+                                displayShape="Circle"
+                                displaySize="XS"
+                            /> -->
+
+                            <Title text="{prodDetail>/Nome}" />
+                        </HBox>
+                    </ux:snappedHeading>
+                </ux:ObjectPageDynamicHeaderTitle>
+            </ux:headerTitle>
+
+            <ux:headerContent>
+                <HBox
+                    wrap="Wrap"
+                    class="sapUiSmallMargin"
+                >
+
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Categoria" />
+                        <Text
+                            text="{path:'prodDetail>/Categoria', formatter:'.formatter.formatCategoria'}"
+                        />
+                    </VBox>
+
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Preço" />
+                        <ObjectNumber
+                            number="{
+                                parts: [{path: 'prodDetail>/Preco'}, {path: 'prodDetail>/Moeda'}],
+                                type: 'sap.ui.model.type.Currency',
+                                formatOptions: { showMeasure: false }
+                            }"
+                            unit="{prodDetail>/Moeda}"
+                        />
+                    </VBox>
+
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Unidade" />
+                        <Text text="{prodDetail>/Unidade}" />
+                    </VBox>
+                </HBox>
+            </ux:headerContent>
+            <ux:sections>
+            <ux:ObjectPageSection title="Informações do Produto">
+                <ux:subSections>
+                    <ux:ObjectPageSubSection>
+                        <VBox class="sapUiMediumMargin">
+
+                            <f:SimpleForm
+                                editable="false"
+                                layout="ResponsiveGridLayout"
+                                class="sapUiMediumMargin"
+                            >
+                                <Label text="Nome" />
+                                <Text text="{prodDetail>/Nome}" />
+
+                                <Label text="ID" />
+                                <Text text="{prodDetail>/Id}" />
+
+                                <Label text="Descrição" />
+                                <Text text="{prodDetail>/Descricao}" />
+
+                                <Label text="Categoria" />
+                                <Text text="{path:'prodDetail>/Categoria', formatter:'.formatter.formatCategoria'}" />
+
+                                <Label text="Preço" />
+                                <ObjectNumber
+                                    number="{
+                                        parts: [{path: 'prodDetail>/Preco'}, {path: 'prodDetail>/Moeda'}],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: { showMeasure: false }
+                                    }"
+                                    unit="{prodDetail>/Moeda}"
+                                />
+
+                                <Label text="Unidade" />
+                                <Text text="{prodDetail>/Unidade}" />
+
+                                <Label text="Status" />
+                                <ObjectStatus
+                                    text="{path:'prodDetail>/Status', formatter:'.formatter.formatStatus'}"
+                                    state="{path:'prodDetail>/Status', formatter:'.formatter.formatStatusState'}"
+                                    inverted="true"
+                                />
+                            </f:SimpleForm>
+
+                        </VBox>
+                    </ux:ObjectPageSubSection>
+                </ux:subSections>
+            </ux:ObjectPageSection>
+        </ux:sections>
+        </ux:ObjectPageLayout>
+    </Page>
+</mvc:View>

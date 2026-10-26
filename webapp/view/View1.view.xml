@@ -1,0 +1,9 @@
+<mvc:View controllerName="zcoffee.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <Button text="Navegar para RH" press="onNavToRH"></Button>
+        <Button text="Navegar para Produtos" press="onNavToProducts"></Button>
+        <Button text="Navegar para Fornecedores" press="onNavToSuppliers"></Button>
+    </Page>
+</mvc:View>

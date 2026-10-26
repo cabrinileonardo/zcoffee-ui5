@@ -1,0 +1,218 @@
+<mvc:View
+    controllerName="zcoffee.controller.RH.ViewFormFuncionario"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+
+    <Page
+        id="page_FormFuncionario"
+        title="Funcionário"
+        showNavButton="true"
+        navButtonPress="onNavToRH">
+
+        <content>
+            <VBox class="sapUiSmallMargin">
+
+                <f:Form
+                    id="FormFuncionario"
+                    editable="true">
+
+                    <f:title>
+                        <core:Title text="{= ${funcionario>/ID} ? 'Editar Funcionário' : 'Novo Funcionário' }"/>
+                    </f:title>
+
+                    <f:layout>
+                        <f:ResponsiveGridLayout
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="4"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false" />
+                    </f:layout>
+
+                    <f:formContainers>
+                        <f:FormContainer>
+                            <f:title>
+                                <core:Title text="Dados Pessoais" icon="sap-icon://employee" />
+                            </f:title>
+                            <f:formElements>
+
+                                <f:FormElement label="ID">
+                                    <f:fields>
+                                        <Input
+                                            id="IdFunc"
+                                            value="{funcionario>/ID}"
+                                            editable="false"
+                                            placeholder="ID do Funcionário" />
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="Nome">
+                                    <f:fields>
+                                        <Input
+                                            id="Nome"
+                                            value="{funcionario>/Nome}"
+                                            placeholder="Ex: João Silva"
+                                            required="true" />
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="CPF">
+                                    <f:fields>
+                                        <MaskInput 
+                                            id="inputCPF"
+                                            value="{funcionario>/CPF}"
+                                            mask="999.999.999-99"
+                                            placeholderSymbol="_"
+                                            placeholder="Digite o CPF">
+                                            <rules>
+                                                <MaskInputRule 
+                                                    maskFormatSymbol="9" 
+                                                    regex="[0-9]"/>
+                                            </rules>
+                                        </MaskInput>
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="Email">
+                                    <f:fields>
+                                        <Input
+                                            id="Email"
+                                            type="Email"
+                                            value="{funcionario>/Email}"
+                                            placeholder="email@zcoffee.com" />
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="Telefone">
+                                    <f:fields>
+                                        <MaskInput 
+                                            id="inputTelefone"
+                                            value="{funcionario>/Telefone}"
+                                            mask="(99) 99999-9999"
+                                            placeholderSymbol="_"
+                                            placeholder="Digite o telefone">
+                                            <rules>
+                                                <MaskInputRule 
+                                                    maskFormatSymbol="9" 
+                                                    regex="[0-9]"/>
+                                            </rules>
+                                        </MaskInput>
+                                    </f:fields>
+                                </f:FormElement>
+                        
+                                <f:FormElement label="Nascimento">
+                                    <f:fields>
+                                        <DatePicker
+                                            id="dp1"
+                                            value="{
+                                                'path': 'funcionario>/Nascimento',
+                                                'type': 'sap.ui.model.odata.type.DateTime',
+                                                'formatOptions': { 'pattern': 'dd/MM/yyyy', 'strictParsing': true },
+                                                'constraints': { 'displayFormat': 'Date' }
+                                            }"
+                                            placeholder="DD/MM/AAAA"/>
+                                    </f:fields>
+                                </f:FormElement> 
+                            </f:formElements>
+                        </f:FormContainer>
+
+                        <f:FormContainer>
+                            <f:title>
+                                <core:Title text="Dados Profissionais" icon="sap-icon://batch-payments"/>
+                            </f:title>
+                            <f:formElements>
+
+                                <f:FormElement label="Admissão">
+                                    <f:fields>
+                                        <DatePicker
+                                            id="dp2"
+                                            value="{path: 'funcionario>/Admissao', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { pattern: 'dd/MM/yyyy', strictParsing: true }}"
+                                            placeholder="DD/MM/AAAA"
+                                            editable="false" />
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="Cargo">
+                                    <f:fields>
+                                        <Select 
+                                            id="Cargo" 
+                                            selectedKey="{funcionario>/Cargo}">
+                                            <items>
+                                                <core:Item key="1" text="Barista" />
+                                                <core:Item key="2" text="Caixa" />
+                                                <core:Item key="3" text="Gerente" />
+                                                <core:Item key="4" text="Supervisor" />
+                                                <core:Item key="5" text="Garçom" />
+                                                <core:Item key="6" text="Cozinheiro" />
+                                            </items>
+                                        </Select>
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="Remuneração">
+                                    <f:fields>
+                                        <Input 
+                                            id="idSalario"
+                                            value="{funcionario>/Salario}" 
+                                            type="Text" 
+                                            description="BRL" 
+                                            fieldWidth="70%" 
+                                            liveChange=".onSalarioChange" 
+                                            placeholder="0,00" />
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="Status">
+                                    <f:fields>
+                                        <ObjectStatus 
+                                            text="Ativo" 
+                                            state="Success" 
+                                            icon="sap-icon://status-positive" />
+                                    </f:fields>
+                                </f:FormElement>
+
+                                <f:FormElement label="Login">
+                                    <f:fields>
+                                        <Input
+                                            id="Login"
+                                            value="{funcionario>/Login}"
+                                            placeholder="Usuário de Login" 
+                                            editable="false"/>
+                                    </f:fields>
+                                </f:FormElement> 
+
+                            </f:formElements>
+                        </f:FormContainer>
+
+                    </f:formContainers>
+                </f:Form>
+
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button 
+                    text="Salvar Funcionário" 
+                    type="Emphasized" 
+                    icon="sap-icon://save" 
+                    press="onSalvarFuncionario" />
+                <Button 
+                    text="Cancelar" 
+                    type="Transparent" 
+                    press="onNavToRH" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,271 @@
+<mvc:View
+    controllerName="zcoffee.controller.RH.ViewDetailFuncionario"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:ux="sap.uxap"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        id="page_DetailFuncionario"
+        title="{i18n>detailTitle}"
+        showNavButton="true"
+        navButtonPress="_onNavBack"
+    >
+        <ux:ObjectPageLayout
+            id="objectPageLayoutDetailFuncionario"
+            class="sapUiResponsiveMargin"
+            upperCaseAnchorBar="false"
+            showTitleInHeaderContent="true"
+            headerContentPinned="true"
+        >
+            <ux:headerTitle>
+                <ux:ObjectPageDynamicHeaderTitle>
+                    <ux:expandedHeading>
+                        <VBox>
+                            <HBox alignItems="Center">
+                                <Avatar
+                                    class="sapUiSmallMarginEnd"
+                                    displayShape="Circle"
+                                    initials="{detail>/NomeInitials}"
+                                    displaySize="L"
+                                />
+
+                                <VBox>
+                                    <Title
+                                        text="{detail>/Nome}"
+                                        wrapping="true"
+                                    />
+
+                                    <HBox
+                                        alignItems="Center"
+                                        class="sapUiTinyMarginTop"
+                                    >
+                                        <ObjectStatus
+                                            text="{
+                                                path:'detail>/Cargo',
+                                                formatter: '.formatter.formatCargo'
+                                            }"
+                                            state="Information"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+
+                                        <ObjectStatus
+                                            text="{
+                                                path:'detail>/Status',
+                                                formatter: '.formatter.formatStatus'
+                                            }"
+                                            state="Success"
+                                            inverted="true"
+                                        />
+                                    </HBox>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </ux:expandedHeading>
+
+                    <ux:snappedHeading>
+                        <HBox alignItems="Center">
+                            <Avatar
+                                class="sapUiTinyMarginEnd"
+                                initials="{detail>/NomeInitials}"
+                                displayShape="Circle"
+                                displaySize="XS"
+                            />
+
+                            <Title text="{detail>/Nome}" />
+                        </HBox>
+                    </ux:snappedHeading>
+                </ux:ObjectPageDynamicHeaderTitle>
+            </ux:headerTitle>
+
+            <ux:headerContent>
+                <HBox
+                    wrap="Wrap"
+                    class="sapUiSmallMargin"
+                >
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Email" />
+                        <Text text="{detail>/Email}" />
+                    </VBox>
+
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Telefone" />
+                        <Text text="{detail>/Telefone}" />
+                    </VBox>
+
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Admissão" />
+                        <Text
+                            text="{
+                            path: 'detail>/Admissao',
+                            type: 'sap.ui.model.type.DateTime',
+                            formatOptions: {
+                                UTC: false,
+                                pattern: 'dd/MM/yyyy'
+                            }
+                        }"
+                        />
+                    </VBox>
+
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="Salário" />
+                        <ObjectNumber
+                            number="{detail>/Salario}"
+                            unit="BRL"
+                        />
+                    </VBox>
+                </HBox>
+            </ux:headerContent>
+
+            <ux:sections>
+                <ux:ObjectPageSection title="Dados Pessoais">
+                    <ux:subSections>
+                        <ux:ObjectPageSubSection>
+                            <VBox class="sapUiSmallMargin">
+                                <f:SimpleForm
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                >
+                                    <Label text="Nome" />
+                                    <Text text="{detail>/Nome}" />
+
+                                    <Label text="CPF" />
+                                    <Text text="{detail>/CPF}" />
+
+                                    <Label text="Email" />
+                                    <Text text="{detail>/Email}" />
+
+                                    <Label text="Telefone" />
+                                    <Text text="{detail>/Telefone}" />
+
+                                    <Label text="Nascimento" />
+                                    <Text
+                                        text="{
+                                        path: 'detail>/Nascimento',
+                                        type: 'sap.ui.model.type.DateTime',
+                                        formatOptions: {
+                                            UTC: false,
+                                            pattern: 'dd/MM/yyyy'
+                                        }
+                                    }"
+                                    />
+                                </f:SimpleForm>
+                            </VBox>
+                        </ux:ObjectPageSubSection>
+                    </ux:subSections>
+                </ux:ObjectPageSection>
+
+                <ux:ObjectPageSection title="Dados Profissionais">
+                    <ux:subSections>
+                        <ux:ObjectPageSubSection>
+                            <VBox class="sapUiSmallMargin">
+                                <f:SimpleForm
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                >
+                                    <Label text="Cargo" />
+                                    <Text
+                                        text="{
+                                        path: 'detail>/Cargo',
+                                        formatter: '.formatter.formatCargo'
+                                        }"
+                                    />
+
+                                    <Label text="Remuneração" />
+                                    <ObjectNumber
+                                        number="{detail>/Salario}"
+                                        unit="BRL"
+                                    />
+
+                                    <Label text="Admissão" />
+                                    <Text
+                                        text="{
+                                        path: 'detail>/Admissao',
+                                        type: 'sap.ui.model.type.DateTime',
+                                        formatOptions: {
+                                            UTC: false,
+                                            pattern: 'dd/MM/yyyy'
+                                        }
+                                    }"
+                                    />
+
+                                    <Label text="Login" />
+                                    <Text text="{detail>/Login}" />
+
+                                    <Label text="Status" />
+                                    <ObjectStatus
+                                        text="{
+                                            path:'detail>/Status',
+                                            formatter: '.formatter.formatStatus'
+                                        }"
+                                        state="Success"
+                                        inverted="true"
+                                    />
+                                </f:SimpleForm>
+                            </VBox>
+                        </ux:ObjectPageSubSection>
+                    </ux:subSections>
+                </ux:ObjectPageSection>
+
+                <ux:ObjectPageSection title="Histórico Salarial">
+                    <ux:subSections>
+                        <ux:ObjectPageSubSection>
+                            <Table
+                                inset="false"
+                                items="{historico>/}"
+                            >
+                                <columns>
+                                    <Column>
+                                        <Text text="Data de alteração" />
+                                    </Column>
+
+                                    <Column>
+                                        <Text text="Salário Antigo" />
+                                    </Column>
+
+                                    <Column>
+                                        <Text text="Salário Novo" />
+                                    </Column>
+
+                                    <Column>
+                                        <Text text="Usuário" />
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text
+                                                text="{
+                                                path: 'historico>DataAlteracao',
+                                                type: 'sap.ui.model.type.DateTime',
+                                                formatOptions: {
+                                                    UTC: false,
+                                                    pattern: 'dd/MM/yyyy'
+                                                }
+                                            }"
+                                            />
+
+                                            <ObjectNumber
+                                                number="{historico>SalarioAntigo}"
+                                                unit="BRL"
+                                            />
+
+                                            <ObjectNumber
+                                                number="{historico>SalarioNovo}"
+                                                unit="BRL"
+                                            />
+
+                                            <Text text="{historico>Usuario}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </ux:ObjectPageSubSection>
+                    </ux:subSections>
+                </ux:ObjectPageSection>
+            </ux:sections>
+        </ux:ObjectPageLayout>
+    </Page>
+</mvc:View>

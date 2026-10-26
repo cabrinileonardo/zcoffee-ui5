@@ -1,0 +1,215 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "zcoffee",
+    "type": "application",
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "supportedLocales": [
+        ""
+      ],
+      "fallbackLocale": ""
+    },
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.23.0",
+      "toolsId": "d4b7e579-4d8b-4111-b99e-0f381126e7f3"
+    },
+    "dataSources": {
+      "ZCOFFEE_ANNO_MDL": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCOFFEE_ANNO_MDL',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/ZCOFFEE_ANNO_MDL.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZCOFFEE_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZCOFFEE_ANNO_MDL"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.23",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.comp": {},
+        "sap.ui.layout": {},
+        "sap.uxap": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zcoffee.i18n.i18n",
+          "supportedLocales": [
+            ""
+          ],
+          "fallbackLocale": ""
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "zcoffee.view",
+        "async": true,
+        "viewPath": "zcoffee.view"
+      },
+      "routes": [
+        {
+          "name": "RouteView1",
+          "pattern": ":?query:",
+          "target": [
+            "TargetView1"
+          ]
+        },
+        {
+          "name": "RouteRH",
+          "pattern": "funcionarios",
+          "target": [
+            "TargetRH"
+          ]
+        },
+        {
+          "name": "RouteNewFuncionario",
+          "pattern": "funcionarios/new",
+          "target": [
+            "TargetFormFuncionario"
+          ]
+        },
+        {
+          "name": "RouteEditFuncionario",
+          "pattern": "funcionarios/{funcionarioId}",
+          "target": [
+            "TargetFormFuncionario"
+          ]
+        },
+        {
+          "name": "RouteDetailFuncionario",
+          "pattern": "funcionarios/detail/{funcionarioId}",
+          "target": [
+            "TargetDetailFuncionario"
+          ]
+        },
+        {
+          "name": "RouteProducts",
+          "pattern": "produtos",
+          "target": [
+            "TargetProducts"
+          ]
+        },
+        {
+          "name": "RouteDetailProduct",
+          "pattern": "produtos/detail/{productId}",
+          "target": [
+            "TargetDetailProduct"
+          ]
+        },
+        {
+          "name": "RouteSuppliers",
+          "pattern": "fornecedores",
+          "target": [
+            "TargetSuppliers"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetView1": {
+          "id": "View1",
+          "name": "View1"
+        },
+        "TargetRH": {
+          "id": "ViewRH",
+          "name": "RH.ViewRH",
+          "transition": "slide"
+        },
+        "TargetFormFuncionario": {
+          "id": "ViewFormFuncionario",
+          "name": "RH.ViewFormFuncionario",
+          "transition": "slide"
+        },
+        "TargetDetailFuncionario": {
+          "id": "ViewDetailFuncionario",
+          "name": "RH.ViewDetailFuncionario",
+          "transition": "slide"
+        },
+        "TargetProducts": {
+          "id": "ViewProducts",
+          "name": "MM.ViewProducts",
+          "transition": "slide"
+        },
+        "TargetDetailProduct": {
+          "id": "ViewDetailProduct",
+          "name": "MM.ViewDetailProduct",
+          "transition": "slide"
+        },
+        "TargetSuppliers": {
+          "id": "ViewSuppliers",
+          "name": "MM.ViewSuppliers",
+          "transition": "slide"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "zcoffee.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}
