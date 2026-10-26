@@ -62,10 +62,11 @@ O serviço `ZCOFFEE_SRV` precisa estar ativo no Gateway (ver o repositório do b
 
 ## Telas
 
-<!-- Coloque os prints na pasta docs/ e eles aparecem aqui -->
-| Funcionários | Produtos |
+| Funcionários (RH) | Produtos (MM) |
 |---|---|
-| ![RH](docs/rh.png) | ![Produtos](docs/produtos.png) |
+| ![RH](docs/RH.png) | ![Produtos](docs/Produtos.png) |
+
+![Detalhe do produto](docs/DetalhesProdutos.png)
 
 ## Roadmap
 
